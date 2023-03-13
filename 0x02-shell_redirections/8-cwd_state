@@ -1,2 +1,2 @@
 #!/bin/bash
-ثثls-la > ls_cwd_content.txt
+ls-la > ls_cwd_content.txt
