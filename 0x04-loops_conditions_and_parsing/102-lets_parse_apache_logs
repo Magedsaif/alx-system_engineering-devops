@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# SCRIPT THAT PRINTS A MESSAGE
+
+file="apache-access.log"
+awk '{print $1, $9}' $file
