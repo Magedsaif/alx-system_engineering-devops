@@ -2,5 +2,6 @@
 # script that configures a new Ubuntu machine to respect some requirements
 sudo apt-get -y update
 sudo apt-get install -y nginx
-echo "Hello World!" | sudo tee /data/web_static/releases/test/index.html
+sudo ufw allow 'Nginx HTTP'
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
 sudo service nginx restart
