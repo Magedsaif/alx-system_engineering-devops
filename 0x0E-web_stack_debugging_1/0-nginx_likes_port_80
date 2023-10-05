@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# Script that fixes a web server to listen on port 80 instead of 8080
+# Script that fixes a web server to listen on port 80 instead of 8080.
 sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
 sudo service nginx restart
