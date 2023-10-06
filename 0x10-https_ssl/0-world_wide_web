@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Configure your domain zone so that the subdomain www points to your load-balancer IP (lb-01 or lb-02).
+if [ $# -eq 0 ]; then
+    exit
+fi
+web-sites=("www" "lb-01" "web-01" "web-02")
+if [ "$2" ]
+then
+    web-sites=("$2")
+fi
+for i in "${web-sites[@]}"
+do
+    first="$(dig $i."$1" | grep -A1 'ANSWER SECTION:'| tail -1 | awk '{print $1}'|cut -d '.' -f1)"
+    second="$(dig $i."$1" | grep -A1 'ANSWER SECTION:'| tail -1 | awk '{print $4}')"
+    third="$(dig $i."$1" | grep -A1 'ANSWER SECTION:'| tail -1 | awk '{print $5}')"
+    echo "The subdomain $first is a $second record and points to $third"
+done
