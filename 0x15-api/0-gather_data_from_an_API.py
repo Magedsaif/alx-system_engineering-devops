@@ -34,8 +34,7 @@ def display_tasks():
 
     # print the completed tasks of the employee
     for task in tasks:
-        formatted_task = task.replace(" ", "S").replace("\t", "T")
-        print("\t {}".format(formatted_task))
+        print("\t {}".format(task))
 
 
 if __name__ == "__main__":
