@@ -3,35 +3,40 @@
 import requests
 from sys import argv
 
-# link to fetch data from the API
-link = "https://jsonplaceholder.typicode.com/users/"
 
-# get the data from
-response = requests.get(link + argv[1])
+def display_tasks():
+    """Python script that fetches data for a given employee ID."""
+    # link to fetch data from the API
+    link = "https://jsonplaceholder.typicode.com/users/"
 
-# convert the data to json format
-data = response.json()
+    # get the data from
+    response = requests.get(link + argv[1])
 
-# get the name of the employee
-name = data.get("name")
-print("Employee {} is done with tasks".format(name), end="")
+    # convert the data to json format
+    data = response.json()
 
-# get the total number of tasks of the employee
-response = requests.get(link + argv[1] + "/todos")
+    # get the name of the employee
+    name = data.get("name")
+    print("Employee {} is done with tasks".format(name), end="")
 
-# convert the data to json format
-data = response.json()
+    # get the total number of tasks of the employee
+    response = requests.get(link + argv[1] + "/todos")
 
-# get the completed tasks and the total number of them
-tasks = []
-for task in data:
-    if task.get("completed") is True:
-        tasks.append(task.get("title"))
-print("({}/{}):".format(len(tasks), len(data)))
+    # convert the data to json format
+    data = response.json()
 
-# print the completed tasks
-for task in tasks:
-    print("\t {}".format(task))
+    # get the completed tasks and the total number of them
+    tasks = []
+    for task in data:
+        if task.get("completed") is True:
+            tasks.append(task.get("title"))
+    print("({}/{}):".format(len(tasks), len(data)))
+
+    # print the completed tasks of the employee
+    for task in tasks:
+        formatted_task = task.replace(" ", "S").replace("\t", "T")
+        print("\t {}".format(formatted_task))
+
 
 if __name__ == "__main__":
-    pass
+    display_tasks()
