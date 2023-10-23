@@ -28,11 +28,18 @@ def display_tasks():
 
     # export as csv file named USER_ID.csv (ex: 2.csv)
     # with columns: "USER_ID", "USERNAME", "TASK_COMPLETED_STATUS","TASK_TITLE"
-    with open("{}.csv".format(argv[1]), "w") as csvfile:
-        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+    with open("{}.csv".format(argv[1]), "w", newline="") as csvfile:
+        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
+                      "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
         for task in data:
-            writer.writerow([argv[1], name, task.get("completed"),
-                            task.get("title")])
+            writer.writerow({
+                "USER_ID": argv[1],
+                "USERNAME": name,
+                "TASK_COMPLETED_STATUS": task.get("completed"),
+                "TASK_TITLE": task.get("title")
+            })
 
 
 if __name__ == "__main__":
